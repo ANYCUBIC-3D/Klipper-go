@@ -1,0 +1,3 @@
+[submodule "rv1106-cross-compilation-toolchain"]
+	path = rv1106-cross-compilation-toolchain
+	url = https://github.com/ANYCUBIC-3D/rv1106-cross-compilation-toolchain.git
