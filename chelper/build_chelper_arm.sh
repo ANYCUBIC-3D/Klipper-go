@@ -13,5 +13,5 @@ if [ -f "$TARGET" ]; then
 fi
 
 rm -rf ./libc_helper.so
-$ARM_GCC $opt -o $PWD/chelper/libc_helper.so $PWD/chelper/*.c
+$CC $opt -o $PWD/chelper/libc_helper.so $PWD/chelper/*.c
 mv $PWD/chelper/libc_helper.so $PWD/project/chelper/
