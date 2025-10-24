@@ -8,3 +8,6 @@ Proceed only if you understand the risks and are confident in your technical abi
 Klipper-go is a Golang porting of klippy (python code of Klipper firmware), dedicated by Anycubic to the community. The firmware is compatible with Kobra 3, Kobra 3V2, Kobra 3 Max and Kobra S1 models from Anycubic.
 
 Contributions are welcome!
+
+## ACKNOWLEDGMENT
+The ACE module implementation in Klipper-go references the structural and logical design of the BunnyACE project ([https://github.com/BlackFrogKok/BunnyACE]). Special thanks to BlackFrogKok for creating and maintaining the original work.
