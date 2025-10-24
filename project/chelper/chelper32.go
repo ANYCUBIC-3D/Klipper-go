@@ -1,4 +1,5 @@
-//go:build arm || 386
+//go:build linux && (arm || 386)
+// +build linux
 // +build arm 386
 
 package chelper
@@ -466,3 +467,7 @@ func Trapq_extract_old(tq interface{}, data []CStruct_pull_move, max int, start_
 func Pull_move_alloc(size int) []CStruct_pull_move {
 	return make([]C.struct_pull_move, size)
 }
+
+type CStructPullHistorySteps = C.struct_pull_history_steps
+type CStructPullMove = C.struct_pull_move
+type CStructPullQueueMessage = C.struct_pull_queue_message

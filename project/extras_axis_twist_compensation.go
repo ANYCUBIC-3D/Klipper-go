@@ -301,7 +301,7 @@ func (ca *Calibrater) _finalize_calibration() {
 	// output result
 	ca.gcmd.Respond_info(fmt.Sprintf(
 		"AXIS_TWIST_COMPENSATION_CALIBRATE: Calibration complete, "+
-			"offsets: %s, mean z_offset: %f",
+			"offsets: %v, mean z_offset: %f",
 		ca.results, avg), true)
 }
 

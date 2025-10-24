@@ -222,9 +222,9 @@ func (self *AccelCommandHelper) Cmd_ACCELEROMETER_MEASURE(argv interface{}) erro
 	// Write data to file
 	var filename string
 	if self.base_name == self.name {
-		filename = fmt.Sprint("/tmp/%s-%s.csv", self.base_name, name)
+		filename = fmt.Sprintf("/tmp/%s-%s.csv", self.base_name, name)
 	} else {
-		filename = fmt.Sprint("/tmp/%s-%s-%s.csv", self.base_name, self.name, name)
+		filename = fmt.Sprintf("/tmp/%s-%s-%s.csv", self.base_name, self.name, name)
 	}
 
 	bg_client.Write_to_file(filename)

@@ -61,7 +61,7 @@ func (self *DS18B20) _build_config() {
 	clock := self._mcu.Get_query_slot(self.oid)
 	self._report_clock = self._mcu.Seconds_to_clock(self.report_time)
 	self._mcu.Add_config_cmd(
-		fmt.Sprintf("query_ds18b20 oid=%d clock=%u rest_ticks=%u min_value=%d max_value=%d",
+		fmt.Sprintf("query_ds18b20 oid=%d clock=%d rest_ticks=%d min_value=%d max_value=%d",
 			self.oid, clock, self._report_clock,
 			int(self.min_temp*1000), int(self.max_temp*1000)),
 		true, false)
@@ -71,7 +71,7 @@ func (self *DS18B20) _handle_ds18b20_response(params map[string]interface{}) err
 	temp := params["value"].(float64) / 1000.0
 
 	if fault, ok := params["fault"]; ok && fault != 0 {
-		logger.Infof("ds18b20 reports fault %self (temp=%.1f)", fault, temp)
+		logger.Infof("ds18b20 reports fault %v (temp=%.1f)", fault, temp)
 		return nil
 	}
 

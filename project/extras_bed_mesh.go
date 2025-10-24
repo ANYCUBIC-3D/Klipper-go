@@ -167,6 +167,7 @@ type BedMesh struct {
 	Log_fade_complete bool
 	Base_fade_target  float64
 	Fade_target       float64
+	Zero_ref_pos      []float64
 	Gcode             *GCodeDispatch
 	Splitter          *MoveSplitter
 	Pmgr              *ProfileManager
@@ -184,6 +185,7 @@ func NewBedMesh(config *ConfigWrapper) *BedMesh {
 	self.Bmc = NewBedMeshCalibrate(config, self)
 	self.Toolhead = nil
 	self.Z_mesh = nil
+	self.Zero_ref_pos = nil
 	self.Horizontal_move_z = config.Getfloat("horizontal_move_z", 5., 0, 0, 0, 0, true)
 	self.Fade_start = config.Getfloat("fade_start", 1., 0, 0, 0, 0, true)
 	self.Fade_end = config.Getfloat("fade_end", 0., 0, 0, 0, 0, true)
@@ -1028,6 +1030,24 @@ func (self *BedMeshCalibrate) Update_config(gcmd *GCodeCommand) {
 	if need_cfg_update || need_mesh_update {
 		self.Verify_algorithm()
 		self.Generate_points()
+		if self.Relative_reference_index == nil && len(self.Bedmesh.Zero_ref_pos) == 2 {
+			idx := -1
+			for i, pt := range self.Points {
+				if Isclose(pt[0], self.Bedmesh.Zero_ref_pos[0], 1e-04, 1e-06) &&
+					Isclose(pt[1], self.Bedmesh.Zero_ref_pos[1], 1e-04, 1e-06) {
+					idx = i
+					break
+				}
+			}
+			if idx >= 0 {
+				idxCopy := idx
+				self.Relative_reference_index = &idxCopy
+				self.Orig_config["rri"] = self.Relative_reference_index
+			} else {
+				logger.Debugf("adaptive_bed_mesh: zero reference position (%.3f, %.3f) not found in generated points", self.Bedmesh.Zero_ref_pos[0], self.Bedmesh.Zero_ref_pos[1])
+			}
+			self.Bedmesh.Zero_ref_pos = nil
+		}
 		// gcmd.Respond_info("Generating new points...", true)
 		// self.Print_generated_points(gcmd.Respond_info)
 		pts := self.Get_adjusted_points()

@@ -322,7 +322,7 @@ func (self *LIS2DW12) _finish_measurements() {
 	self.lock.Lock()
 	self.raw_samples = make([]map[string]interface{}, 0)
 	self.lock.Unlock()
-	log.Println("LIS2DW12 finished '%s' measurements", self.name)
+	log.Printf("LIS2DW12 finished '%s' measurements", self.name)
 }
 
 // API interface

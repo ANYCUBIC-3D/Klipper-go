@@ -1120,7 +1120,7 @@ func (self *ACE) cmd_ACE_TEST_RUNOUT_SENSOR(argv interface{}) error {
 
 		//# Test runout detection logic
 		would_trigger := !runout_helper_present || !endstop_triggered
-		gcmd.Respond_info(fmt.Sprintf("  - Would trigger runout: ", would_trigger), true)
+		gcmd.Respond_info(fmt.Sprintf("  - Would trigger runout: %v", would_trigger), true)
 	} else {
 		gcmd.Respond_info("ACE: Extruder sensor not found", true)
 	}
