@@ -29,6 +29,7 @@ func LoadMainModule() map[string]interface{} {
 		"encoder_sensor":                         Load_config_prefix_EncoderSensor,
 		"pause_resume":                           Load_config_pause_resume,
 		"bed_mesh":                               Load_config_bed_mesh,
+		"adaptive_bed_mesh":                      Load_config_adaptive_bed_mesh,
 		"tmc2209":                                Load_config_TMC2209,
 		"tmc2240":                                Load_config_TMC2240,
 		"force_move":                             Load_config_force_move,

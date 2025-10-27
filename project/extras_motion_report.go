@@ -3,7 +3,6 @@ package project
 /*
 #include <stdio.h>
 #cgo CFLAGS: -I${SRCDIR}/chelper
-#cgo LDFLAGS: -L${SRCDIR}/chelper -lc_helper -lm
 
 #include "stepcompress.h"
 */
@@ -585,8 +584,8 @@ func (self *PrinterMotionReport) _dump_shutdown(argv interface{}) interface{} {
 	pos, velocity := dtrapq.(*DumpTrapQ).get_trapq_position(shutdown_time)
 	_ = velocity
 	if value.IsNotNone(pos) {
-		logger.Debugf(fmt.Sprintf("Requested toolhead position at shutdown time %.6f: %s",
-			shutdown_time, pos))
+		logger.Debugf("Requested toolhead position at shutdown time %.6f: %v",
+			shutdown_time, pos)
 	}
 	return nil
 }

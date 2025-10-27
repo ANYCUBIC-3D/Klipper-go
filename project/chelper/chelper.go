@@ -1,11 +1,12 @@
-//go:build amd64 || arm64
+//go:build linux && (amd64 || arm64)
+// +build linux
 // +build amd64 arm64
 
 package chelper
 
 /*
 #cgo CFLAGS: -I${SRCDIR}
-#cgo LDFLAGS: -L${SRCDIR} -lc_helper -lm
+#cgo LDFLAGS: -L${SRCDIR} -Wl,-rpath,'$$ORIGIN' -lc_helper -lm
 #include "pyhelper.h"
 #include "serialqueue.h"
 #include "stepcompress.h"
@@ -462,3 +463,7 @@ func Trapq_extract_old(tq interface{}, data []CStruct_pull_move, max int, start_
 func Pull_move_alloc(size int) []CStruct_pull_move {
 	return make([]C.struct_pull_move, size)
 }
+
+type CStructPullHistorySteps = C.struct_pull_history_steps
+type CStructPullMove = C.struct_pull_move
+type CStructPullQueueMessage = C.struct_pull_queue_message
